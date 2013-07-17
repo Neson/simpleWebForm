@@ -38,6 +38,15 @@ $form = array(
       'required' => false
     ),
 
+    'disabled' => array(
+      'type' => 'text',
+      'label' => '此欄勿填',
+      'placeholder' => '此欄勿填',
+      'value' => '0123456789',
+      'required' => false,
+      'disabled' => true
+    ),
+
     'msg' => array(
       'type' => 'textarea',
       'label' => '留言',
@@ -120,15 +129,21 @@ if ( isset($_POST['form_send']) ) {
               switch ($item['type']) {
 
                 case text:
-                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><input type=\"text\" name=\"".$name."\" class=\"input-xlarge\" placeholder=\"".$item['placeholder']."\" value=\"".$item['value']."\"><span class=\"help-block\">".$item['description']."</span></div></div>";
+                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><input type=\"text\" name=\"".$name."\" class=\"input-xlarge\" placeholder=\"".$item['placeholder']."\" value=\"".$item['value']."\" ";
+                  if ( $item['disabled'] == true ) echo "disabled=\"disabled\"";
+                  echo "><span class=\"help-block\">".$item['description']."</span></div></div>";
                 break;
 
                 case email:
-                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><input type=\"text\" name=\"".$name."\" class=\"input-xlarge\" placeholder=\"".$item['placeholder']."\" value=\"".$item['value']."\"><span class=\"help-block\">".$item['description']."</span></div></div>";
+                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><input type=\"text\" name=\"".$name."\" class=\"input-xlarge\" placeholder=\"".$item['placeholder']."\" value=\"".$item['value']."\" ";
+                  if ( $item['disabled'] == true ) echo "disabled=\"disabled\"";
+                  echo "><span class=\"help-block\">".$item['description']."</span></div></div>";
                 break;
 
                 case checkbox:
-                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><label class=\"checkbox inline\"><input type=\"checkbox\" name=\"".$name."\"> ".$item['placeholder']."</label><span class=\"help-block\">".$item['description']."</span></div></div>";
+                  echo "<div class=\"control-group ".$name." ".$item['type']."\"><label class=\"control-label\">".$item['label']."</label><div class=\"controls\"><label class=\"checkbox inline\"><input type=\"checkbox\" name=\"".$name."\" ";
+                  if ( $item['disabled'] == true ) echo "disabled=\"disabled\"";
+                  echo "> ".$item['placeholder']."</label><span class=\"help-block\">".$item['description']."</span></div></div>";
                 break;
 
                 case textarea:
